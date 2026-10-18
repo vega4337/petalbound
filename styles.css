@@ -908,3 +908,44 @@ h1 .flower {
   #menu .title-footer .divider,#menu .title-footer>span:last-child { display:none; }
   #menu .world-index { max-width:180px; font-size:7px; gap:8px 10px; }
 }
+
+/* Roomier phone controls, including a transparent margin for near misses. */
+@media(pointer:coarse) {
+  .touch-pad {
+    bottom:max(22px,calc(env(safe-area-inset-bottom) + 10px));
+    gap:16px;
+  }
+  .touch-pad.left { left:max(16px,calc(env(safe-area-inset-left) + 8px)); }
+  .touch-pad.right { right:max(16px,calc(env(safe-area-inset-right) + 8px)); }
+  .touch-btn {
+    position:relative;
+    width:clamp(60px,18vw,72px);
+    height:72px;
+    font-size:28px;
+  }
+  .touch-btn::before {
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:inherit;
+  }
+  .touch-btn.jump {
+    width:clamp(76px,21vw,84px);
+    height:84px;
+    font-size:13px;
+  }
+  .touch-btn.dash {
+    width:clamp(60px,17vw,68px);
+    height:68px;
+    font-size:11px;
+    margin-bottom:0;
+  }
+  .icon-btn { min-width:48px; height:48px; }
+  .icon-btn svg { width:20px; height:20px; }
+  .top-actions { gap:10px; }
+}
+@media(pointer:coarse) and (max-width:360px) {
+  .touch-pad { gap:12px; }
+  .touch-pad.left { left:max(12px,calc(env(safe-area-inset-left) + 8px)); }
+  .touch-pad.right { right:max(12px,calc(env(safe-area-inset-right) + 8px)); }
+}

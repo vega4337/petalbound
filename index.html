@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#eee7fa">
+<meta name="description" content="Petalbound — an endless, entirely procedural pastel platforming adventure. No downloads, accounts, or external assets.">
+<title>Petalbound Deluxe · The Four Lights</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="stage"><main id="frame" aria-label="Petalbound platform game">
+<canvas id="game" aria-label="Side-scrolling platformer. Move with A and D or arrow keys, jump with Space, sprint with Shift." tabindex="0"></canvas><div id="vignette"></div>
+<div id="logo" class="logo-small">petalbound ✧</div>
+<div class="top-actions"><button id="settingsButton" class="icon-btn" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="#fffaf3"/><circle cx="15" cy="17" r="3" fill="#fffaf3"/></svg></button>
+<button id="helpButton" class="icon-btn" aria-label="How to play" title="How to play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 1.5-2.5 3.5M12 17h.01"/></svg></button>
+<button id="soundButton" class="icon-btn" aria-label="Mute audio" title="Mute / unmute (M)"><svg id="soundIcon" viewBox="0 0 24 24"></svg></button>
+<button id="pauseButton" class="icon-btn" aria-label="Pause game" title="Pause (P / Escape)" hidden><svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg></button>
+<button id="fullscreenButton" class="icon-btn fullscreen" aria-label="Toggle fullscreen" title="Fullscreen (F)"><svg viewBox="0 0 24 24"><path d="M8 4H4v4M16 4h4v4M4 16v4h4M20 16v4h-4"/></svg></button>
+</div>
+<div id="hud" class="hud" hidden>
+<div class="stat score-stat"><label>Score</label><strong id="score">00000</strong></div><div class="stat-line"></div>
+<div class="stat"><label>Distance</label><strong id="distance">0 m</strong></div><div class="stat"><label>Stardust</label><strong><span class="coin-icon">✧</span> <span id="coins">0</span></strong></div><div class="stat"><label>Lives</label><strong id="lives">♡ ♡ ♡</strong></div>
+</div>
+<div id="biomeHud" class="biome-hud" hidden><div class="biome-name" id="biomeName">Meadow of Dawn</div><div class="biome-track"><i id="biomeProgress"></i></div><div id="ability" class="ability">Little blossom</div><div id="objective" class="objective">Follow the morning light</div></div>
+<section id="menu" class="overlay" aria-label="Title screen"><div class="title-card">
+<div class="edition"><span></span> Deluxe Edition · The Four Lights</div>
+<h1>Petal<i class="flower">✳</i><em>bound.</em></h1>
+<p class="tagline">A little spirit. A world worth saving.</p>
+<p class="description">Gather the scattered lights of a sleeping world. Wander through four painted realms, awaken the Moonkeeper, and find your way home.</p>
+<div class="start-row"><button id="startButton" class="primary">Begin the story <span class="arrow">↗</span></button><span class="start-hint">or press Enter</span></div>
+<div class="secondary-start"><button id="continueStory" class="subtle" hidden>Continue story ↗</button><button id="endlessStart" class="subtle">Endless wandering ∞</button></div><div class="title-footer"><span>Personal best <strong id="menuBest">0 m</strong><br><span style="display:inline-block;margin-top:4px">High score <strong id="menuBestScore">0</strong></span></span><span class="divider"></span><span>Original art · Original soundtrack</span></div>
+</div><div class="world-index"><span><i style="background:#A8E6CF"></i>01 Meadow</span><span><i style="background:#DED2F9"></i>02 Clouds</span><span><i style="background:#FFD3B6"></i>03 Desert</span><span><i style="background:#adacd8"></i>04 Twilight</span></div></section>
+<section id="pause" class="overlay modal-overlay" hidden aria-label="Paused"><div class="modal-card"><div class="medallion">☾</div><p class="eyebrow">A moment of stillness</p><h2>Catch your breath.</h2><p>Your little world will be right here.</p><div class="button-row"><button id="resumeButton" class="primary">Keep wandering ↗</button><button id="pauseRestart" class="subtle">New journey</button></div><p>Press P or Escape to continue</p></div></section>
+<section id="gameover" class="overlay modal-overlay" hidden aria-label="Journey ended"><div class="modal-card"><div class="medallion">✿</div><p class="eyebrow" id="resultEyebrow">Every ending is a seed</p><h2>A lovely little journey.</h2><div class="result-grid"><div><label>Distance</label><strong id="resultDistance">0 m</strong></div><div><label>Score</label><strong id="resultScore">0</strong></div><div><label>Best</label><strong id="resultBest">0 m</strong></div></div><p id="resultMessage">There’s always another path waiting to bloom.</p><div class="button-row"><button id="restartButton" class="primary">Bloom again ↗</button><button id="homeButton" class="subtle">Title screen</button></div><p>Press R for a fresh start</p></div></section>
+<section id="help" class="overlay modal-overlay" hidden aria-label="How to play"><div class="modal-card"><p class="eyebrow">A field guide for small adventurers</p><h2>Find your rhythm.</h2><div class="help-grid"><div><b>Move & leap</b><p><span class="key">A</span> <span class="key">D</span> or ← → to move.<br><span class="key">Space</span> / W / ↑ to jump. Hold for height; release for a short hop.</p></div><div><b>A little burst of speed</b><p>Hold <span class="key">Shift</span> to sprint. Tap it to dash after the first garden, or while powered up. Dash defeats every critter.</p></div><div><b>Grow & glow</b><p>Hit ✦ blocks from below. Pink lotus: blossom into double size and break bricks. Lavender star: 25 seconds of extra jumps and gliding.</p></div><div><b>Watch your step</b><p>Stomp blobs and flutterers. Spikes hurt from above. Jump off bounce clouds; keep moving on sinking sandbars.</p></div><div><b>Grow your abilities</b><p>First garden: permanent dash. Cloud realm: double jump. Desert realm: hold jump to glide. Story gardens save across visits.</p></div><div><b>An endless daydream</b><p>Story: four realms and a Moonkeeper finale. Endless: new patterns forever. Find three memory petals in each realm. <span class="key">P</span> pause · <span class="key">M</span> audio.</p></div></div><p class="help-note">On touchscreens, use the arrow, JUMP, and DASH buttons. Rotate to landscape for a wider view. Records save on this browser when storage is available.</p><button id="closeHelp" class="primary">I’m ready ↗</button></div></section>
+<section id="victory" class="overlay modal-overlay" hidden aria-label="Story complete"><div class="modal-card"><div class="medallion">✺</div><p class="eyebrow">All four lights, home again</p><h2>The world remembers.</h2><p>You woke the Moonkeeper and brought dawn back to the dreaming forest.</p><div class="result-grid"><div><label>Score</label><strong id="victoryScore">0</strong></div><div><label>Memory petals</label><strong id="victoryRelics">0 / 12</strong></div><div><label>Journey time</label><strong id="victoryTime">0:00</strong></div></div><div class="button-row"><button id="victoryEndless" class="primary">Keep wandering ∞</button><button id="victoryHome" class="subtle">Return home</button></div></div></section>
+<section id="settings" class="overlay modal-overlay" hidden aria-label="Settings"><div class="modal-card"><p class="eyebrow">Make this world your own</p><h2>A little fine tuning.</h2><label class="setting-row">Music <input id="musicVolume" type="range" min="0" max="100" value="45" aria-label="Music volume"></label><label class="setting-row">Sound effects <input id="sfxVolume" type="range" min="0" max="100" value="65" aria-label="Sound effects volume"></label><label class="setting-row">Visual quality <select id="quality"><option value="high">Lush</option><option value="low">Light · smoother on phones</option></select></label><label class="setting-row">Reduced motion <input id="reducedMotion" type="checkbox"></label><p>Your preferences save on this browser. Records and story checkpoints stay on this device.</p><button id="closeSettings" class="primary">Back to the dream ↗</button></div></section>
+<div id="bossHud" hidden><span>THE MOONKEEPER</span><strong id="bossHealth">✧ ✧ ✧ ✧ ✧</strong><small id="bossHint">Wait for the wings to settle</small></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="touch" aria-label="Touch controls"><div class="touch-pad left"><button class="touch-btn" data-control="left" aria-label="Move left">←</button><button class="touch-btn" data-control="right" aria-label="Move right">→</button></div><div class="touch-pad right"><button class="touch-btn dash" data-control="dash" aria-label="Sprint or powered dash">DASH</button><button class="touch-btn jump" data-control="jump" aria-label="Jump and glide">JUMP</button></div></div>
+<div id="landscape">↻ Landscape gives your daydream more room</div><span id="announcer" class="screen-reader" aria-live="polite"></span>
+</main></div><div id="loading"><div><p class="eyebrow">Petalbound Deluxe</p><h2>Painting a little wonder…</h2><div class="loading-track"><i id="loadingProgress"></i></div><p id="loadingText">Opening the sketchbook</p></div></div>
+<noscript><div id="noscript">Petalbound needs JavaScript enabled to grow its world.</div></noscript>
+<script defer src="src/assets.js"></script>
+<script defer src="src/audio.js"></script>
+<script defer src="src/art.js"></script>
+<script defer src="src/game.js"></script>
+</body>
+</html>

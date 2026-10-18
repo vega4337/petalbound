@@ -1,0 +1,32 @@
+{
+  "edition": "Petalbound Deluxe — The Four Lights",
+  "runtime": "Build-free HTML / CSS / JavaScript with bundled PNG and WAV assets",
+  "artwork": {
+    "panoramas": 4,
+    "sprite_atlases": 2,
+    "creation": "Built-in image generation; prompt set in assets/art/ART-NOTES.md"
+  },
+  "audio": {
+    "music_loops": 4,
+    "seconds_per_loop": 45.7143,
+    "format": "24 kHz 16-bit mono WAV",
+    "sound_effects": "Web Audio synthesized"
+  },
+  "verification": {
+    "javascript_syntax": "passed",
+    "portable_game_logic_checks": "passed",
+    "package_asset_checks": "passed",
+    "generated_templates_checked": 400,
+    "streaming_chunks_simulated": 1000,
+    "native_canvas_render_inspection": "desktop, portrait, four realms and guardian",
+    "story_save_restore": "passed",
+    "guardian_and_ending": "passed",
+    "actual_live_browser_layout_input_audio": "unverified: preview environment unavailable"
+  },
+  "required_runtime_dependencies": [],
+  "entry_points": [
+    "START-HERE.html",
+    "index.html",
+    "PLAY-WINDOWS.bat"
+  ]
+}

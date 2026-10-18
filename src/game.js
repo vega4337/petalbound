@@ -94,7 +94,6 @@
       this.scale=[0,4,7,11,14,11,7,4,2,5,9,12,16,12,9,5,0,4,7,12,16,14,11,7,-3,0,4,7,11,7,4,0];
     }
     unlock() {
-      soundtrack.start();
       try {
         if(!this.ctx) {
           this.ctx=new(window.AudioContext||window.webkitAudioContext)();
@@ -111,6 +110,7 @@
         });
       }catch {
       }
+      soundtrack.start(this.ctx);
     }
     tone(freq,duration=.16,type='sine',gain=.15,at=0,endFreq=null,lowpass=null) {
       if(!this.ctx||this.muted)return;

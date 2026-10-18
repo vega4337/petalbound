@@ -8,7 +8,7 @@ window.PetalAssets = (() => {
     spirit: 'assets/art/spirit-atlas.png',
     creatures: 'assets/art/creatures-atlas.png'
   };
-  const music = ['meadow', 'clouds', 'desert', 'twilight'].map(name => `assets/audio/${name}.wav`);
+  const music = ['meadow', 'clouds', 'desert', 'twilight'].map(name => `assets/audio/${name}.wav?v=arrangements-2`);
   const images = {}, failures = [];
   let completed = 0;
   const jobs = Object.entries(paths).map(([name, path]) => new Promise(resolve => {

@@ -112,9 +112,9 @@ const music = [
 ];
 ```
 
-Use tracks with similar loudness and clean loop points. Each track loops independently; its volume crossfades during a realm transition. Playback speed changes very slightly with gameplay intensity. Volume is adjustable in-game. Short, responsive jump/coin/impact effects are synthesized through Web Audio; they require no extra files.
+Use tracks with similar loudness and clean loop points. Each track lasts 3 minutes 12 seconds and loops continuously at a steady tempo. Hosted playback uses decoded Web Audio buffers so the loop does not depend on restarting a media element. Only the current and upcoming realm remain decoded in memory, and their volumes crossfade during realm transitions. Pausing preserves the playback position; resuming continues from there. Direct-file play uses HTML audio with an explicit end-of-track restart fallback. Volume is adjustable in-game. Short, responsive jump/coin/impact effects are synthesized through Web Audio; they require no extra files.
 
-The included soundtrack is an original layered instrumental composition rendered to WAV files, with soft keyboard, harp, flute, bell, bass, and pad voices. It is not fetched or generated during play. `tools/render_music.py` reproduces the four loops if you have Python and numpy; it is an optional asset-authoring tool, not a play requirement.
+The four original instrumental arrangements use warm felt-style keys, harp, flute, celesta, sustained bass, and soft pads. Each 64-bar piece develops through an opening, theme, answer, interlude, variation, lift, reprise, and gentle return. Melody phrases leave space for gameplay; wrapped note and reverb tails join the end back to the beginning. It is not fetched or generated during play. `tools/render_music.py` reproduces the four loops if you have Python and numpy; it is an optional asset-authoring tool, not a play requirement.
 
 ### Artwork
 
@@ -146,11 +146,12 @@ From the game folder, run these optional checks:
 
 ```text
 node tools/verify_game.cjs
+node tools/verify_audio.cjs
 python tools/verify_package.py
 ```
 
 During authoring, JavaScript syntax, native Canvas renders, platform reach, variable jumps, coyote time, jump buffering, block collisions, powers, dash, glide, bounded streaming, 400 generated chunks, saved-story resume, keyboard/touch event logic, audio envelopes, the guardian's five-hit defeat, and the ending were checked. All four WAV files were inspected for valid format, clipping, and loop boundaries.
 
-The available live-browser preview was blocked by the execution environment. Actual browser layout, physical touch/controller input, and audible device playback remain to be confirmed in a real browser. The included checks exercise game logic and packaged asset integrity; they do not replace browser testing.
+Playback was also checked in a mobile-emulated Edge browser: the 192-second buffer continued producing non-silent output across its loop boundary, and pause/resume and mute controls worked. Audio lifecycle regression checks cover interrupted playback, crossfades, end recovery, delayed loading, per-realm failures, buffer release, and direct-file fallback. Physical iPhone/Android playback and perceived musical quality still depend on the actual device and listening preferences.
 
 This repository is published with GitHub Pages from the main branch and repository root.

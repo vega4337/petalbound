@@ -8,9 +8,11 @@
   },
   "audio": {
     "music_loops": 4,
-    "seconds_per_loop": 45.7143,
+    "seconds_per_loop": 192,
     "format": "24 kHz 16-bit mono WAV",
-    "sound_effects": "Web Audio synthesized"
+    "sound_effects": "Web Audio synthesized",
+    "arrangement": "64 bars at 80 BPM; eight evolving sections per realm",
+    "playback": "Web Audio buffer loops with current/next realm crossfades; HTML audio fallback for local files"
   },
   "verification": {
     "javascript_syntax": "passed",
@@ -21,7 +23,8 @@
     "native_canvas_render_inspection": "desktop, portrait, four realms and guardian",
     "story_save_restore": "passed",
     "guardian_and_ending": "passed",
-    "actual_live_browser_layout_input_audio": "unverified: preview environment unavailable"
+    "actual_live_browser_layout_input_audio": "Mobile-emulated Edge: non-silent output across loop seam, pause/resume and mute passed",
+    "audio_lifecycle_regressions": "passed"
   },
   "required_runtime_dependencies": [],
   "entry_points": [

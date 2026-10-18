@@ -24,7 +24,7 @@ document = Document()
 document.feed((ROOT/'index.html').read_text(encoding='utf-8'))
 assert len(document.ids) == len(set(document.ids)), 'Duplicate HTML id'
 for relative in document.paths:
-    assert (ROOT/relative).is_file(), f'Missing file: {relative}'
+    assert (ROOT/relative.split('?')[0]).is_file(), f'Missing file: {relative}'
 
 scripts = '\n'.join(p.read_text(encoding='utf-8') for p in (ROOT/'src').glob('*.js'))
 ids = set(re.findall(r'''\$\(["']([\w-]+)["']\)''', scripts))
@@ -42,6 +42,7 @@ for file in (ROOT/'assets/audio').glob('*.wav'):
     with wave.open(str(file),'rb') as audio:
         assert audio.getnchannels() == 1 and audio.getsampwidth() == 2
         assert audio.getframerate() == 24000 and audio.getnframes() > 1000000
+        assert audio.getnframes() / audio.getframerate() == 192, f'Unexpected duration: {file.name}'
         values = array.array('h', audio.readframes(audio.getnframes()))
     assert max(map(abs,values)) < 32700, f'Clipping: {file.name}'
     assert abs(values[-1]-values[0]) < 2000, f'Loop discontinuity: {file.name}'
